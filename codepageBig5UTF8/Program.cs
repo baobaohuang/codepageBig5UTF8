@@ -79,7 +79,6 @@ namespace codepageBig5UTF8
             System.IO.File.WriteAllText(@"C:\test\taiwanBig5.json", utf8Str);
             
         }
-        }
 
     }
 }
