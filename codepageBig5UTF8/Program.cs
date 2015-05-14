@@ -38,9 +38,9 @@ namespace codepageBig5UTF8
         {
             //1200 utf-16  65001 utf-8
             StringBuilder sb = new StringBuilder();
-            byte[] unknow = Encoding.GetEncoding(1200).GetBytes(input);
-            byte[] unknow2 = Encoding.GetEncoding(950).GetBytes(input);
-            string result = Encoding.GetEncoding(65001).GetString(unknow);
+            byte[] unknow = Encoding.GetEncoding(950).GetBytes(input);
+            byte[] utf8Bytes = System.Text.Encoding.Convert(System.Text.Encoding.GetEncoding("BIG5"), System.Text.Encoding.Unicode, unknow);
+            string result = Encoding.GetEncoding(1200).GetString(utf8Bytes);
             sb.AppendLine(result);
 
             File.WriteAllText(@"C:\bb.txt", sb.ToString());
