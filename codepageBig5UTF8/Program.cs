@@ -57,6 +57,29 @@ namespace codepageBig5UTF8
             File.WriteAllText(@"C:\cc.txt", sb.ToString());
         
         }
+        
+        static void big5streamToUTF8()
+        {
+            byte[] big5Bytes = null;
+            //string fileName = @"C:\Users\frankhuang\Downloads\aa.txt";
+            string fileName = @"C:\test\taiwan.json";
+            string utf8Str;
+            using (System.IO.FileStream fs = new System.IO.FileStream(fileName, System.IO.FileMode.Open))
+            {
+                //note: this is a successful convert method unless method above has some unicode string problem
+                //get big5 encoding bytes
+                big5Bytes = new byte[fs.Length];
+                fs.Read(big5Bytes, 0, (int)fs.Length);
+                //big5 byte convert to utf8 bytes
+                byte[] utf8Bytes = System.Text.Encoding.Convert(System.Text.Encoding.GetEncoding("BIG5"), System.Text.Encoding.UTF8, big5Bytes);
+                //utf8 bytes to utf8 string
+                System.Text.UTF8Encoding encUtf8 = new System.Text.UTF8Encoding();
+                 utf8Str = encUtf8.GetString(utf8Bytes);
+            }
+            System.IO.File.WriteAllText(@"C:\test\taiwanBig5.json", utf8Str);
+            
+        }
+        }
 
     }
 }
